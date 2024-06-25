@@ -14,7 +14,7 @@ def object_type(X_set):
             cols_to_encode.append(key)
     return cols_to_encode
 
-def performance_dataframe(n_estimators, X, y) -> pd.DataFrame:   
+def performance_dataframe(n_estimators, X, y, depth=2) -> pd.DataFrame:   
     perform_dict = {"test" : [], "train": []}
     
     for i in range(1, n_estimators+1):
@@ -29,7 +29,7 @@ def performance_dataframe(n_estimators, X, y) -> pd.DataFrame:
             X_test  = encoder.transform(X_test)
         
         # Creating Random Forest model
-        random_forest = RandomForestClassifier(n_estimators=i)
+        random_forest = RandomForestClassifier(n_estimators=i, max_depth=depth)
         
         # Training model
         random_forest.fit(X_train, y_train)
@@ -50,7 +50,7 @@ def performance_dataframe(n_estimators, X, y) -> pd.DataFrame:
 
     return perform_data
 
-def performance_plot(n_estimators, X, y) -> plt.plot:
+def performance_plot(n_estimators, X, y, depth=2) -> plt.plot:
     """
         performance_plot function takes input X, y data from a clean dataset and calculate the performance of RandomForestClassifier given a number of estimators.
         Arguments:
@@ -72,7 +72,7 @@ def performance_plot(n_estimators, X, y) -> plt.plot:
             X_test  = encoder.transform(X_test)
         
         # Creating Random Forest model
-        random_forest = RandomForestClassifier(n_estimators=i)
+        random_forest = RandomForestClassifier(n_estimators=i, max_depth=depth)
         
         # Training model
         random_forest.fit(X_train, y_train)

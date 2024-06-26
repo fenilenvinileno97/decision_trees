@@ -1,7 +1,7 @@
 # Import libraries
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report
 import category_encoders as ce
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -29,7 +29,7 @@ def performance_dataframe(n_estimators, X, y, depth=2) -> pd.DataFrame:
             X_test  = encoder.transform(X_test)
         
         # Creating Random Forest model
-        random_forest = RandomForestClassifier(n_estimators=i, max_depth=depth)
+        random_forest = RandomForestClassifier(n_estimators=i, max_depth=depth, random_state=42)
         
         # Training model
         random_forest.fit(X_train, y_train)
@@ -72,7 +72,7 @@ def performance_plot(n_estimators, X, y, depth=2) -> plt.plot:
             X_test  = encoder.transform(X_test)
         
         # Creating Random Forest model
-        random_forest = RandomForestClassifier(n_estimators=i, max_depth=depth)
+        random_forest = RandomForestClassifier(n_estimators=i, max_depth=depth, random_state=42)
         
         # Training model
         random_forest.fit(X_train, y_train)
